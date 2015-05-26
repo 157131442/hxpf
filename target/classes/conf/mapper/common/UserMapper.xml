@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.common.user.model.User">
+	<resultMap id="UserResultMap" type="com.hx.common.user.model.User">
+		<id property="id" column="id" />
+		<result property="account" column="account" />
+		<result property="name" column="name" />
+	</resultMap>
+	<select id="read" parameterType="String" resultMap="UserResultMap">
+		<![CDATA[ 
+            select * from os_user u 
+            where u.id = #{id}
+        ]]>
+	</select>
+	<insert id="insert" parameterType="com.hx.common.user.model.User"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[ 
+		  	insert into os_user(account, name) 
+		  	values(#{account}, #{name})
+        ]]>
+	</insert>
+	<update id="update" parameterType="com.hx.common.user.model.User">  
+		<![CDATA[ 
+		  	update os_user set account = #{account}, name = #{name}
+		  	where id = #{id}
+        ]]>
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from os_user where id = #{id}
+	</delete>
+</mapper>
